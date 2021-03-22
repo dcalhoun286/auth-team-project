@@ -2,6 +2,13 @@
 
 const express = require('express');
 const app = express();
+const morgan = require('morgan');
+
+const authRouter = require('./routes/routes.js');
+
+app.use(express.json());
+app.use(authRouter);
+app.use(morgan);
 
 module.exports = {
   app: app,
