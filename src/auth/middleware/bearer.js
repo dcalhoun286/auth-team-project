@@ -1,5 +1,5 @@
 
-const User = require('../models/users.js');
+const User = require('./models/users.js')
 module.exports = async(req,res,next)=>{
 
   try{
@@ -9,6 +9,7 @@ module.exports = async(req,res,next)=>{
 
    req.user = validUser;
    req.token = validUser.token;
+   
    next()
   }catch(e){
     _authError();

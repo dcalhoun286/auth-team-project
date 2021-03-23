@@ -4,7 +4,6 @@ const express = require('express');
 const cors = require('cors')
 const app = express();
 const morgan = require('morgan');
-const fs = require('fs')
 
 const authRouter = require('./auth/middleware/routes/routes.js');
 

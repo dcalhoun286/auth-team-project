@@ -14,7 +14,7 @@
     <div id="sign-up">
       <!-- signup -->
       <h2>Sign Up</h2>
-      <form id="sign-up-form" method="POST">
+      <form id="sign-up-form" action="/signup" method="POST">
         <input type="text" class="username" name="username" placeholder="Enter Username">
         <input type="password" class="password" name="password" placeholder="Enter Password">
         <textarea name="bio" class="content" cols="30" rows="10"></textarea>
@@ -75,27 +75,31 @@
     //   $('#output-box').text('HELLO WORLD');
     // })
 
-    $('#sign-up-form').submit(function (event) {
-      event.preventDefault();
-      const ajaxSettings = {
-        method: 'POST'
-      };
-      let username = $('#sign-up > .username').val()
-      let password = $('#sign-up > .password').val()
-      let bio = $('#sign-up > .content').val()
-      let user = {
-        username: username,
-        password: password,
-        bio: bio
-      }
-      console.log(user)
-      $.ajax(`http://localhost:3000/signup`, ajaxSettings)
-        .send(user)
-        .then(data => {
-          $('#output-box').text(data)
-          // data
-        });
-    })
+    // $('#sign-up-form').submit(function (event) {
+    //   event.preventDefault();
+    //   console.log("hi")
+    //   const ajaxSettings = {
+    //     method: 'POST'
+    //   };
+      
+    //   let username = $('#sign-up > .username').val()
+      
+    //   console.log(username)
+    //   let password = $('#sign-up > .password').val()
+    //   let bio = $('#sign-up > .content').val()
+    //   let user = {
+    //     username: username,
+    //     password: password,
+    //     bio: bio
+    //   }
+    //   console.log(user)
+    //   $.ajax(`http://localhost:3000/signup`, ajaxSettings)
+    //     .send(user)
+    //     .then(data => {
+    //       $('#output-box').text(data)
+    //       // data
+    //     });
+    // })
   </script>
 </body>
 
