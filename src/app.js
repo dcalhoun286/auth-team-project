@@ -1,9 +1,9 @@
 const base64 = require('base-64')
 
-    $('#sign-up-form').submit(function (event) {
-      event.preventDefault();
-      $('#output-box').text('HELLO WORLD');
-    })
+    // $('#sign-up-form').submit(function (event) {
+    //   event.preventDefault();
+    //   $('#output-box').text('HELLO WORLD');
+    // })
 
 //   event.preventDefault();
 //   const ajaxSettings = {

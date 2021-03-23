@@ -8,6 +8,7 @@ const basicAuth = require('../basic');
 const bearerAuth = require('../bearer.js');
 const permissions = require('../acl.js');
 
+
 authRouter.post('/signup', signupUser);
 authRouter.get('/signin', basicAuth, signinUser);
 authRouter.get('/users', bearerAuth, permissions('read'), userHandler)
@@ -16,7 +17,9 @@ authRouter.get('/delete', bearerAuth, permissions('delete'), deleteHandler)
 
 async function signupUser(req, res, next) {
   try {
+    console.log(req.body)
     let user = new User(req.body);
+    console.log(user)
     const userRecord = await user.save();
     res.status(201).json(userRecord)
   } catch (e) {
