@@ -1,69 +1,68 @@
-const base64 = require('base-64')
-
-    // $('#sign-up-form').submit(function (event) {
-    //   event.preventDefault();
-    //   $('#output-box').text('HELLO WORLD');
-    // })
-
-//   event.preventDefault();
-//   const ajaxSettings = {
-//     method: 'POST'
-//   };
-//   let username = $('#sign-up > .username').val()
-//   let password = $('#sign-up > .password').val()
-//   let bio = $('#sign-up > .content').val()
-//   let user = {
-//     username: username,
-//     password: password,
-//     bio: bio
-//   }
-//   $.ajax(`http://localhost:3000/signup`, ajaxSettings)
-//     .send(user)
-//     .then(data => {
-//       $('#output-box').text(data)
-//       // data
-//     });
-// })
-
+// const base64 = require('base-64')
 
 // $('#sign-up-form').submit(function (event) {
 //     event.preventDefault();
-//   $('#output-box').text('HELLO WORLD');
-// })
+//     console.log('hello world')
+//     $('#output-box').text('Hello World')
+//   })
 
-// bring it info from form: username and password
+// $('#sign-up-form').submit(function (event) {
+//     event.preventDefault();
+//     let username = $('#sign-up-username').val()
+//     let password = $('#sign-up-password').val()
+//     let bio = $('#sign-up-bio').val()
+//     let user = {
+//       username: username,
+//       password: password,
+//       bio: bio
+//     }
+//     console.log('====================================')
+//     const ajaxSettings = {
+//       method: 'POST',
+//        data: user   // GETS PASSED IN AS REQ.BODY          
+//     };
 
-// function afterClick() {
-//   let __ENDPOINT__ = $(this).value()
-//   let userinfo = base64.encode(`${username}:${password}`)
-//   $.ajax(`http://localhost:3000/signin`)
-//     .set('authorization', `Basic ${userinfo}`)
-//     .then(data => {
-//       $('#output-box').text(data)
-//       // data
-//     });
-// }
+//     $.ajax(`/signup`, ajaxSettings)
+//       .then(data => {
+//         $('#output-box').text(JSON.stringify(data))
+//       });
+//   })
 
-// function afterClick() {
-//   let __ENDPOINT__ = $(this).value()
-//   $.ajax(`http://localhost:3000/read${__ENDPOINT__}`)
-//     .auth(`Bearer ${token}`)
-//     .then(data => {
-//       $('#output-box').text(data)
-//       // returns own users data
-//     });
-// }
+//   $('#sign-in-form').submit(function (event) {
+//     event.preventDefault();
+    
+//     let username = $('#sign-in-username').val()
+//     let password = $('#sign-in-password').val()
+    // let userinfo = base64.encode(`${username}:${password}`)
+    
+//     const ajaxSettings = {
+//       method: 'POST',
+//       headers: {
+//         'authorization': `Basic ${userinfo}`
+//       }   
+//     };
 
-// function afterClick() {
-//   let __ENDPOINT__ = $(this).value()
-//   $.ajax(`http://localhost:3000/delete${__ENDPOINT__}`, ajaxSetting)
-//     .auth(`Bearer ${token}`)
-//     .then(data => {
-//       $('#output-box').text(data)
-//     });
-// }
+//     $.ajax(`/signin`, ajaxSettings)
+//       .then(data => {
+//         $('#output-box').text(JSON.stringify(data))
+//       });
+//   })
 
+//   $('#read-form').submit(function (event) {
+//     event.preventDefault();
+    
+//     let token = $('#token').val()
+//     $('#output-box').text(token)
+    
+//     const ajaxSettings = {
+//       method: 'GET',
+//       headers: {
+//         'authorization': `Bearer ${token}`
+//       }   
+//     };
 
-// const ajaxSettings = {
-//   method: 'GET'
-// };
+//     $.ajax(`/read`, ajaxSettings)
+//       .then(data => {
+//         $('#output-box').text(JSON.stringify(data))
+//       });
+//   })

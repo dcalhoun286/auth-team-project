@@ -4,101 +4,197 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
-    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous"></script>
+  <link type="text/css" rel="stylesheet" href="./styles/reset.css">
+  <link type="text/css" rel="stylesheet" href="./styles/styles.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+
   <title>Document</title>
 </head>
 
 <body>
   <main>
-    <div id="sign-up">
-      <!-- signup -->
-      <h2>Sign Up</h2>
-      <form id="sign-up-form" action="/signup" method="POST">
-        <input type="text" class="username" name="username" placeholder="Enter Username">
-        <input type="password" class="password" name="password" placeholder="Enter Password">
-        <textarea name="bio" class="content" cols="30" rows="10"></textarea>
-        <button>SUBMIT</button>
-      </form>
-    </div>
-    <div id="sign-in">
-      <!-- signin -->
-      <h2>Sign In</h2>
-      <form action="POST" method="POST">
-        <input type="text" class="username" name="username" placeholder="Enter Username">
-        <input type="password" class="password" name="password" placeholder="Enter Password">
-        <button>SUBMIT</button>
-      </form>
-    </div>
-    <div id="read">
-      <!-- read -->
-      <h2>Read</h2>
-      <form action="/users" method="GET">
-        <!-- textbox to enter token -->
-        <input type="text" class="token" name="token" placeholder="Enter Token">
-        <button>SUBMIT</button>
-      </form>
-    </div>
-    <div id="edit">
-      <!-- edit -->
-      <h2>Edit</h2>
-      <form action="/edit/?_method=PUT" method="POST">
-        <!-- textbox to enter token -->
-        <input type="text" class="token" name="token" placeholder="Enter Token">
-        <!-- textbox to enter username -->
-        <<input type="text" class="username" name="username" placeholder="Enter Username">
-          <!-- textbox to enter changes to bio -->
-          <textarea name="bio" class="username" cols="30" rows="10"></textarea>
+    <div id="left-container">
+      <div id="sign-up">
+        <!-- signup -->
+        <h2>Sign Up</h2>
+        <form id="sign-up-form" method="POST">
+          <input id="sign-up-username" type="text" class="username" name="username" placeholder="Enter Username">
+          <input id="sign-up-role" type="Role" class="Role" name="Role" placeholder="Enter Role">
+          <input id="sign-up-password" type="password" class="password" name="password" placeholder="Enter Password">
+          <textarea id="sign-up-bio" name="bio" class="content" cols="30" rows="10"></textarea>
           <button>SUBMIT</button>
-      </form>
+        </form>
+      </div>
+      <div id="sign-in">
+        <!-- signin -->
+        <h2>Sign In</h2>
+        <form id="sign-in-form" method="POST">
+          <input id="sign-in-username" type="text" class="username" name="username" placeholder="Enter Username">
+          <input id="sign-in-password" type="password" class="password" name="password" placeholder="Enter Password">
+          <button>SUBMIT</button>
+        </form>
+      </div>
+      <div id="read">
+        <!-- read -->
+        <h2>Read</h2>
+        <form id="read-form" method="GET">
+          <!-- textbox to enter token -->
+          <input id="token" type="text" class="token" name="token" placeholder="Enter Token">
+          <button>SUBMIT</button>
+        </form>
+      </div>
+      <div id="update">
+        <!-- update -->
+        <h2>Update</h2>
+        <form id="update-form" method="POST">
+          <!-- textbox to enter token -->
+          <input id="update-token" type="text" class="token" name="token" placeholder="Enter Token">
+          <!-- textbox to enter username -->
+          <input id="update-username" type="text" class="username" name="username" placeholder="Enter Username">
+          <!-- textbox to enter changes to bio -->
+          <textarea id="update-bio" name="bio" class="username" cols="30" rows="10"></textarea>
+          <button>SUBMIT</button>
+        </form>
+      </div>
+      <div id="delete">
+        <!-- delete -->
+        <h2>Delete</h2>
+        <form id="delete-form" method="POST">
+          <!-- textbox to enter token -->
+          <input id="delete-token" type="text" name="token" placeholder="Enter Token">
+          <!-- textbox to enter username -->
+          <input id="delete-username" type="text" name="username" placeholder="Enter Username">
+          <button>SUBMIT</button>
+        </form>
+      </div>
     </div>
-    <div id="delete">
-      <!-- delete -->
-      <h2>Delete</h2>
-      <form action="/update/?_method=DELETE" method="POST">
-        <!-- textbox to enter token -->
-        <input type="text" name="token" placeholder="Enter Token">
-        <!-- textbox to enter username -->
-        <input type="text" name="username" placeholder="Enter Username">
-        <button>SUBMIT</button>
-      </form>
+    <div id="right-container">
+       <!-- THIS WILL BE A BOX THAT DISPLAYS USER INFORMATION -->
+    <h2 id="output-box-head">OUTPUT BOX</h2>
+    <p id="output-box"></p>
     </div>
-
-    <!-- THIS WILL BE A BOX THAT DISPLAYS USER INFORMATION -->
-    <p id="output-box">OUTPUT BOX</p>
+   
   </main>
   <footer></footer>
-  <script src="./app.js"></script>
+
   <script>
-    // $('#sign-up-form').submit(function (event) {
-    //   event.preventDefault();
-    //   $('#output-box').text('HELLO WORLD');
-    // })
+    // SIGNUP
+    $('#sign-up-form').submit(function (event) {
+      event.preventDefault();
+      let username = $('#sign-up-username').val()
+      let password = $('#sign-up-password').val()
+      let role = $('#sign-up-role').val()
+      let bio = $('#sign-up-bio').val()
+      let user = {
+        username: username,
+        password: password,
+        role: role,
+        bio: bio
+      }
+      const ajaxSettings = {
+        method: 'POST',
+         data: user   // GETS PASSED IN AS REQ.BODY          
+      };
 
-    // $('#sign-up-form').submit(function (event) {
-    //   event.preventDefault();
-    //   console.log("hi")
-    //   const ajaxSettings = {
-    //     method: 'POST'
-    //   };
+      $.ajax(`/signup`, ajaxSettings)
+        .then(data => {
+          $('#output-box').text(JSON.stringify(data))
+        });
+    })
+
+    // SIGNIN
+    $('#sign-in-form').submit(function (event) {
+      event.preventDefault();
       
-    //   let username = $('#sign-up > .username').val()
-    //   let password = $('#sign-up > .password').val()
-    //   let bio = $('#sign-up > .content').val()
-    //   let user = {
-    //     username: username,
-    //     password: password,
-    //     bio: bio
-    //   }
+      let username = $('#sign-in-username').val()
+      let password = $('#sign-in-password').val()
+      let userinfo = btoa(`${username}:${password}`)
+      const ajaxSettings = {
+        method: 'POST',
+        headers: {
+          authorization: `Basic ${userinfo}`
+        }   
+      };
+      $('#output-box').text(ajaxSettings.headers.authorization)
+      $.ajax(`/signin`, ajaxSettings)
+        .then(data => {
+          $('#output-box').text(JSON.stringify(data))
+        });
+    })
 
-    //   console.log(user)
-    //   $.ajax(`http://localhost:3000/signup`, ajaxSettings)
-    //     .send(user)
-    //     .then(data => {
-    //       $('#output-box').text(data)
-    //       // data
-    //     });
-    // })
+    // READ
+    $('#read-form').submit(function (event) {
+      event.preventDefault();
+      
+      let token = $('#token').val()
+      
+      const ajaxSettings = {
+        method: 'GET',
+        headers: {
+          authorization: `Bearer ${token}`
+        }   
+      };
+
+      $.ajax(`/read`, ajaxSettings)
+        .then(data => {
+          $('#output-box').text(JSON.stringify(data))
+        });
+    })
+
+
+    // UPDATE
+    $('#update-form').submit(function (event) {
+      event.preventDefault();
+      
+      let token = $('#update-token').val()
+      let username = $('#update-username').val()
+      let bio = $('#update-bio').val()
+      $('#output-box').text(bio)
+      
+      const ajaxSettings = {
+        method: 'PUT',
+        headers: {
+          authorization: `Bearer ${token}`
+        },
+        data: {
+          username: username,
+          bio: bio
+        }
+      };
+      
+      $.ajax(`/update`, ajaxSettings)
+        .then(data => {
+          $('#output-box').text(JSON.stringify(data))
+        });
+    })
+
+
+    // DELETE
+    $('#delete-form').submit(function (event) {
+      event.preventDefault();
+      
+      let token = $('#delete-token').val()
+      let username = $('#delete-username').val()
+      
+      const ajaxSettings = {
+        method: 'DELETE',
+        headers: {
+          authorization: `Bearer ${token}`
+        },
+        data: {
+          username: username
+        }
+      };
+      
+      $.ajax(`/delete`, ajaxSettings)
+        .then(data => {
+          $('#output-box').text(JSON.stringify(data))
+        });
+    })
+
+
   </script>
 </body>
 

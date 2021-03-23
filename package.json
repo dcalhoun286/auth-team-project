@@ -5,6 +5,7 @@
   "main": "index.js",
   "dependencies": {
     "@code-fellows/supergoose": "^1.0.11",
+    "axios": "^0.21.1",
     "base-64": "^1.0.0",
     "bcrypt": "^5.0.1",
     "cors": "^2.8.5",
