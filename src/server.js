@@ -6,16 +6,16 @@ const app = express();
 const morgan = require('morgan');
 const fs = require('fs')
 
-const authRouter = require('./routes/routes.js');
+const authRouter = require('./auth/middleware/routes/routes.js');
 
 app.use(express.json());
 app.use(authRouter);
-app.use(morgan);
+app.use(morgan('dev'));
 app.use(cors())
 
 app.get('/', (req, res) => {
-  res.status(200).send('Hello world')
-})
+  res.sendFile(__dirname + '/index.html');
+});
 
 app.use('*', (req, res) => {
   res.status(404).send('Route does not exist')
