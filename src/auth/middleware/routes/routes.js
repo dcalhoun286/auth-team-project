@@ -10,25 +10,24 @@ const permissions = require('../acl.js');
 
 
 authRouter.post('/signup', signupUser);
-authRouter.get('/signin', basicAuth, signinUser);
-authRouter.get('/users', bearerAuth, permissions('read'), userHandler)
-authRouter.get('/update', bearerAuth, permissions('update'), updateHandler)
-authRouter.get('/delete', bearerAuth, permissions('delete'), deleteHandler)
+authRouter.post('/signin', basicAuth, signinUser);
+authRouter.get('/read', bearerAuth, permissions('read'), readHandler)
+authRouter.put('/update', bearerAuth, permissions('update'), updateHandler)
+authRouter.delete('/delete', bearerAuth, permissions('delete'), deleteHandler)
 
 async function signupUser(req, res, next) {
   try {
-    console.log(req.body)
     let user = new User(req.body);
-    console.log(user)
     const userRecord = await user.save();
+    console.log(userRecord);
     res.status(201).json(userRecord)
   } catch (e) {
-    console.log('HELLO WORLD')
     next(e.message)
   }
 }
 
 async function signinUser(req, res, next) {
+
   const user = {
     user: req.user,
     token: req.user.token
@@ -36,24 +35,23 @@ async function signinUser(req, res, next) {
   res.status(200).json(user)
 }
 
-async function userHandler(req, res, next){
+async function readHandler(req, res, next) {
   let currentUser = req.user
-  const user = await User.findOne({username: currentUser.username});
+  const user = await User.findOne({ username: currentUser.username });
   res.status(200).json(user);
 };
 
-async function updateHandler(req, res, next){
-  const id = req.params.id;
+async function updateHandler(req, res, next) {
   const obj = req.body;
-  let updatedRecord = await req.model.update(id, obj)
-  res.status(200).json(updatedRecord);
+  console.log('THIS IS OBJECT IN UPDATE HANDLER', obj)
+  let updatedRecord = await User.update({ username: obj.username }, { $set: { bio: obj.bio } })
+  res.status(200).send(`Bio for user '${obj.username}' has been succesfully updated!`);
 };
 
 async function deleteHandler(req, res, next) {
-  let id = req.params.id;
-  let deletedRecord = await req.model.delete(id);
-  res.status(200).json(deletedRecord);
+  let user = req.body.username
+  let deletedRecord = await User.findOneAndDelete({ username: user });
+  res.status(200).send(`User '${deletedRecord.username}' has been successfully deleted`);
 }
 
 module.exports = authRouter;
-
